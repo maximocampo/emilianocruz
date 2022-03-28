@@ -1,135 +1,124 @@
-# Gatsby + Netlify CMS Starter
+[![Netlify Status](https://api.netlify.com/api/v1/badges/8ec719ad-c2f8-4529-b97d-e7561a9eaf33/deploy-status)](https://app.netlify.com/sites/delog-w3layouts/deploys) &nbsp;<a href="https://twitter.com/intent/follow?screen_name=w3layouts">
+  <img src="https://img.shields.io/twitter/follow/w3layouts.svg?label=Follow%20@w3layouts" alt="Follow @w3layouts" />
+</a>
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/b654c94e-08a6-4b79-b443-7837581b1d8d/deploy-status)](https://app.netlify.com/sites/gatsby-starter-netlify-cms-ci/deploys)
+# Delog - Blog for Developer and Designer
+This simple website built with GatsbyJS and Netlify CMS. Deploys on netlify with single click. This Starter is sponsered by [W3Layouts](https://w3layouts.com).
 
-**Note:** This starter uses [Gatsby v4](https://www.gatsbyjs.com/gatsby-4/).
+[![Delog - Gatsby Starter Demo](https://w3layouts.com/wp-content/uploads/2020/03/delog.jpg)](https://delog-w3layouts.netlify.com/)
 
-This repo contains an example business website that is built with [Gatsby](https://www.gatsbyjs.org/), and [Netlify CMS](https://www.netlifycms.org): **[Demo Link](https://gatsby-netlify-cms.netlify.com/)**.
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/W3Layouts/gatsby-starter-delog)
 
-It follows the [JAMstack architecture](https://jamstack.org) by using Git as a single source of truth, and [Netlify](https://www.netlify.com) for continuous deployment, and CDN distribution.
+Install this starter locally: (assuming you already have [NodeJS and GatsbyJS installed](https://www.gatsbyjs.org/tutorial/part-zero/))
+```bash
+gatsby new gatsby-starter-delog https://github.com/W3Layouts/gatsby-starter-delog
+```
+
+Instructions also available at W3Layouts [Delog Launch Article](https://w3layouts.com/articles/delog-gatsby-starter-netlify-cms/).
 
 ## Features
+- Built with GatsbyJS and Netlify CMS
+- Option to Add, Edit, Update and Delete posts via Netlify CMS
+- SEO friendly - Option to Add meta description
+- In-built contact form powered by [W3Layouts](https://w3layouts.com) 
+- Comes with dark mode
 
-- A simple landing page with blog functionality built with Netlify CMS
-- Editable Pages: Landing, About, Product, Blog-Collection and Contact page with Netlify Form support
-- Create Blog posts from Netlify CMS
-- Tags: Separate page for posts under each tag
-- Basic directory organization
-- Uses Bulma for styling, but size is reduced by `gatsy-plugin-purgecss`
-- Blazing fast loading times thanks to pre-rendered HTML and automatic chunk loading of JS files
-- Uses `gatsby-plugin-image` with Netlify-CMS preview support
-- Separate components for everything
-- Netlify deploy configuration
-- Netlify function support, see `netlify/functions` folder
-- Perfect score on Lighthouse for SEO, Accessibility and Performance (wip:PWA)
-- ..and more
+---
 
-## Prerequisites
+## Documentation
 
-- Minimal Node.js version 14.15.0
-- [Gatsby CLI](https://www.gatsbyjs.com/docs/reference/gatsby-cli/)
-- [Netlify CLI](https://github.com/netlify/cli)
+* Once you hit "[Deploy to Netlify](https://app.netlify.com/start/deploy?repository=https://github.com/W3Layouts/gatsby-starter-delog)"
+* Connect Github
+* Enter Repository Name
+* And your site starts build process. After the build process your website is live
 
-## Getting Started (Recommended)
+### Changing repositary URL for Netlify CMS access
+You need to change repo URL to your own `repo` at `/static/admin/config.yml`, for example `username/repo-name`
 
-Netlify CMS can run in any frontend web environment, but the quickest way to try it out is by running it on a pre-configured starter site with Netlify. The example here is the Kaldi coffee company template (adapted from [One Click Hugo CMS](https://github.com/netlify-templates/one-click-hugo-cms)). Use the button below to build and deploy your own copy of the repository:
+### Creating Github OAuth Client ID
+* Goto Github [Developer Settings](https://github.com/settings/developers)
+* **New OAuth** 
+* Enter Application name
+* Homepage URL as Netlify URL
+* And **Authorization callback URL** to `https://api.netlify.com/auth/done`)
+* Once Client ID and Secret token is generated configure same in [Netlify Access Control](#accessing-netlify-cms-admin) as described.
 
-<a href="https://app.netlify.com/start/deploy?repository=https://github.com/netlify-templates/gatsby-starter-netlify-cms&amp;stack=cms"><img src="https://www.netlify.com/img/deploy/button.svg" alt="Deploy to Netlify"></a>
+### Accessing Netlify CMS Admin
+* Goto your Netlify site admin
+* Goto **Access Control** > **OAuth** then **Install Provider** you need to select provider as `Github` as add `Client ID` and `Secret` 
+* Your Netlify CMS is ready. Goto you netlify site URL and append `/admin/`. for example `example.netlify.com/admin/`, You will see login with Github button.
 
-After clicking that button, you’ll authenticate with GitHub and choose a repository name. Netlify will then automatically create a repository in your GitHub account with a copy of the files from the template. Next, it will build and deploy the new site on Netlify, bringing you to the site dashboard when the build is complete. Next, you’ll need to set up Netlify’s Identity service to authorize users to log in to the CMS.
+### Managing Blog Posts in Netlify CMS
+* Once logged in you will find all the blog post listed here.
+* You can create, edit, update and delete like any CMS
 
-### Access Locally
+### Editing Meta Data
+Inside you Netlify CMS admin, `Settings > Config` or you can go to `site-meta-data.json`. Here you can edit following details
+* Title
+* Description
+* Site URL
+* Homepage Title
+* Homepage Description
+* To get the Contact form working. you need too add a form at [W3Layouts forms](https://my.w3layouts.com/Forms/). Follow the steps [How to enable W3Layouts Contact form](https://w3layouts.com/articles/introducing-contact-forms-for-static-websites/) instructions to create a form then your contact form is all set.
 
-Pulldown a local copy of the Github repository Netlify created for you, with the name you specified in the previous step
+### Add Google Analytics
+Change `trackingId` in `gatsby-config.js` at `gatsby-plugin-google-analytics` plugin
 
-```
-$ git clone https://github.com/[GITHUB_USERNAME]/[REPO_NAME].git
-$ cd [REPO_NAME]
-$ yarn
-$ netlify dev # or ntl dev
-```
+---
 
-This uses [Netlify Dev](https://www.netlify.com/products/dev/?utm_source=blog&utm_medium=netlifycms&utm_campaign=devex) CLI feature to serve any functions you have in the `netlify/functions` folder.
+I hope you will build a great website with Delog. If you like it please spread the word, Feel free to contribute and raise a pull request :)
 
-To test the CMS locally, you'll need to run a production build of the site:
+For issues,feedback on enhancement or sharing your new awesome website built with delog. [Create New Issue](https://github.com/W3Layouts/gatsby-starter-delog/issues/new) Here
 
-```
-$ npm run build
-$ netlify dev # or ntl dev
-```
+---
 
-### Media Libraries (installed, but optional)
+## Roadmap
+We are maintaining future task in [Github Project](https://github.com/W3Layouts/gatsby-starter-delog/projects/1), even though most changes are instantaious. We try keep them posted here.
 
-Media Libraries have been included in this starter as a default. If you are not planning to use `Uploadcare` or `Cloudinary` in your project, you **can** remove them from module import and registration in `src/cms/cms.js`. Here is an example of the lines to comment or remove them your project.
+---
 
-```javascript
-import CMS from "netlify-cms-app";
-// import uploadcare from 'netlify-cms-media-library-uploadcare'
-// import cloudinary from 'netlify-cms-media-library-cloudinary'
+## Credits
+- Awesome image used in demo is from [Unsplash](https://unsplash.com)
+- CSS and SVG Icons by [CSS.gg](https://css.gg)
 
-import AboutPagePreview from "./preview-templates/AboutPagePreview";
-import BlogPostPreview from "./preview-templates/BlogPostPreview";
-import ProductPagePreview from "./preview-templates/ProductPagePreview";
-import IndexPagePreview from "./preview-templates/IndexPagePreview";
+---
 
-// CMS.registerMediaLibrary(uploadcare);
-// CMS.registerMediaLibrary(cloudinary);
+## Changelog
+All notable changes to this project are listed here.
 
-CMS.registerPreviewTemplate("index", IndexPagePreview);
-CMS.registerPreviewTemplate("about", AboutPagePreview);
-CMS.registerPreviewTemplate("products", ProductPagePreview);
-CMS.registerPreviewTemplate("blog", BlogPostPreview);
-```
+### [1.6.0] - 2020-05-03
+#### Added
+- Custom 404 page.
+- Site name will be appended in blog posts and contact page.
+- Reordering fields in Netlify CMS for better flow of post creation.
+- Validation for path in Netlify CMS
 
-Note: Don't forget to also remove them from `package.json` and `yarn.lock` / `package-lock.json` using `yarn` or `npm`. During the build netlify-cms-app will bundle the media libraries as well, having them removed will save you build time.
-Example:
+### [1.5.0] - 2020-05-03
+#### Added
+- Settings page in Netlify CMS to customize site meta data.
+- Site meta data is pulled from `site-meta-data.json`. maintained via Netlify CMS
 
-```
-yarn remove netlify-cms-media-library-uploadcare
-```
+### [1.4.0] - 2020-05-01
+#### Added
+- `gatsby-plugin-sitemap` Creates a sitemap for your Gatsby site in production.
 
-OR
+#### Changed
+- Changelog improvements
+- Comments on `gatsby-config.js`
+- Comments on `static/admin/config.yml`
 
-```
-yarn remove netlify-cms-media-library-cloudinary
-```
+### [1.3.0] - 2020-04-30
+#### Added
+- `gatsby-plugin-offline` drop-in support for making a GatsbyJS site work offline and more resistant to bad network connections.
+- `gatsby-plugin-manifest` configures GatsbyJS to create a manifest.webmanifest file on every site build
 
-## Getting Started (Without Netlify)
+### [1.2.0] - 2020-04-28
+#### Added 
+- GatsbyJS Increment builds with Netlify deployment
 
-```
-$ gatsby new [SITE_DIRECTORY_NAME] https://github.com/netlify-templates/gatsby-starter-netlify-cms/
-$ cd [SITE_DIRECTORY_NAME]
-$ npm run build
-$ npm run start
-```
+### [1.1.0] - 2020-04-21
+#### Added 
+- Dark mode compatibitly and toggle for user preference
 
-### Setting up the CMS
-
-Follow the [Netlify CMS Quick Start Guide](https://www.netlifycms.org/docs/quick-start/#authentication) to set up authentication, and hosting for production.
-
-If you want use Netlify CMS locally, run the site in one terminal with `npm run start` and in another
-Terminal you can use `npx netlify-cms-proxy-server` which proxy requests so you'll be automatically logged
-in as a user on [http:localhost:3000/admin](http:localhost:3000/admin).
-
-## Debugging
-
-Windows users, who aren't using [WSL](https://docs.microsoft.com/en-us/windows/wsl/about), might encounter `node-gyp` errors when trying to npm install.
-To resolve, make sure that you have both Python 2.7 and the Visual C++ build environment installed.
-
-```
-npm config set python python2.7
-npm install --global --production windows-build-tools
-```
-
-[Full details here](https://www.npmjs.com/package/node-gyp "NPM node-gyp page").
-
-MacOS and WSL users who might also encounter some errors, check [node-gyp](https://github.com/nodejs/node-gyp) for more info. We recommend using the latest stable node version.
-
-## Purgecss
-
-This plugin uses [gatsby-plugin-purgecss](https://www.gatsbyjs.org/packages/gatsby-plugin-purgecss/) and [bulma](https://bulma.io/). The bulma builds are usually ~170K but reduced 90% by purgecss.
-
-# CONTRIBUTING
-
-Contributions are always welcome, no matter how large or small. Before contributing,
-please read the [code of conduct](CODE_OF_CONDUCT.md).
+### [1.0.0] - 2020-03-14
+- Launch of GatsbyJS and Netlify CMS based starter `gatsby-starter-delog`

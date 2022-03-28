@@ -1,85 +1,65 @@
+/**
+ * Configure your Gatsby site with this file.
+ *
+ * See: https://www.gatsbyjs.org/docs/gatsby-config/
+ */
+
 module.exports = {
-  siteMetadata: {
-    title: "Gatsby + Netlify CMS Starter",
-    description:
-      "This repo contains an example business website that is built with Gatsby, and Netlify CMS.It follows the JAMstack architecture by using Git as a single source of truth, and Netlify for continuous deployment, and CDN distribution.",
-  },
+  /* Your site config here */
+  siteMetadata: require("./site-meta-data.json"),
   plugins: [
-    "gatsby-plugin-react-helmet",
+    `gatsby-plugin-less`,
     {
-      resolve: "gatsby-plugin-sass",
+      resolve: `gatsby-source-filesystem`,
       options: {
-        sassOptions: {
-          indentedSyntax: true,
+        name: `markdown-pages`,
+        path: `${__dirname}/_data`,
+      },
+    },
+    {
+      resolve: `gatsby-transformer-remark`,
+      options: {
+        plugins: [{
+          resolve: `gatsby-remark-prismjs`,
+          options: {
+            classPrefix: "language-",
+            inlineCodeMarker: null,
+            aliases: {},
+            showLineNumbers: false,
+            noInlineHighlight: false,
+          },
         },
+        {
+          resolve: 'gatsby-remark-emojis',
+        }],
       },
     },
     {
-      // keep as first gatsby-source-filesystem plugin for gatsby image support
-      resolve: "gatsby-source-filesystem",
+      resolve: `gatsby-plugin-google-analytics`,
       options: {
-        path: `${__dirname}/static/img`,
-        name: "uploads",
-      },
+        // The property ID; the tracking code won't be generated without it. replace with yours
+        trackingId: "UA-164743872-1",
+        head: true,
+      }
     },
     {
-      resolve: "gatsby-source-filesystem",
+      resolve: `gatsby-plugin-manifest`,
       options: {
-        path: `${__dirname}/src/pages`,
-        name: "pages",
+        name: `Delog GatbsyJS Starter`,
+        short_name: `Delog`,
+        start_url: `/`,
+        background_color: `#fff`,
+        theme_color: `#381696`,
+        display: `standalone`,
+        icon: "src/images/icon.png",
       },
     },
-    {
-      resolve: "gatsby-source-filesystem",
-      options: {
-        path: `${__dirname}/src/img`,
-        name: "images",
-      },
-    },
-    `gatsby-plugin-image`,
-    "gatsby-plugin-sharp",
-    "gatsby-transformer-sharp",
-    {
-      resolve: "gatsby-transformer-remark",
-      options: {
-        plugins: [
-          {
-            resolve: "gatsby-remark-relative-images",
-            options: {
-              name: "uploads",
-            },
-          },
-          {
-            resolve: "gatsby-remark-images",
-            options: {
-              // It's important to specify the maxWidth (in pixels) of
-              // the content container as this plugin uses this as the
-              // base for generating different widths of each image.
-              maxWidth: 2048,
-            },
-          },
-          {
-            resolve: "gatsby-remark-copy-linked-files",
-            options: {
-              destinationDir: "static",
-            },
-          },
-        ],
-      },
-    },
-    {
-      resolve: "gatsby-plugin-netlify-cms",
-      options: {
-        modulePath: `${__dirname}/src/cms/cms.js`,
-      },
-    },
-    {
-      resolve: "gatsby-plugin-purgecss", // purges all unused/unreferenced css rules
-      options: {
-        develop: true, // Activates purging in npm run develop
-        purgeOnly: ["/all.sass"], // applies purging only on the bulma css file
-      },
-    }, // must be after other CSS plugins
-    "gatsby-plugin-netlify", // make sure to keep it last in the array
+    `gatsby-plugin-sass`,
+    `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-netlify-cms`,
+    'gatsby-plugin-dark-mode',
+    // siteURL is a must for sitemap generation
+    `gatsby-plugin-sitemap`,
+    `gatsby-plugin-offline`,
   ],
-};
+}
