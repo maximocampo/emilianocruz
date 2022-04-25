@@ -12,7 +12,8 @@ const IndexPage = ({
     allMarkdownRemark: { edges },
   },
 }) => {
-    console.log('edges', edges)
+    const t = edges.map(d => d.node.frontmatter)
+  console.log('ee', t)
     
     /*
   const Posts = edges
@@ -27,7 +28,13 @@ const IndexPage = ({
       </Helmet>
       <img src={nota} alt=""/>
       <img src={nota2} alt=""/>
-      <PostLink  post={{title: "artist's statement"}} x={120} y="80%" />
+      {t.map((item, i) => (
+          <PostLink
+              post={{title: item.title}}
+              x={i * 260 + 150}
+              y={`${Math.floor(Math.random() * 100)}%`}
+          />))}
+      
     </Layout>
   )
 }
@@ -47,10 +54,8 @@ export const pageQuery = graphql`
           id
           excerpt(pruneLength: 250)
           frontmatter {
-            date(formatString: "MMMM DD, YYYY")
             path
             title
-            thumbnail
           }
         }
       }

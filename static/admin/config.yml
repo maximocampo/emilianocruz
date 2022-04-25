@@ -1,6 +1,7 @@
 backend:
   name: github
   # change repo to your git repository url
+  branch: main
   repo: maximocampo/emilianocruz
   commit_messages:
     create: "Create {{collection}} “{{slug}}”"
@@ -13,10 +14,16 @@ local_backend: true
 media_folder: static/img
 public_folder: /img
 
+media_library:
+  name: cloudinary
+  config:
+    cloud_name: maximocampo
+    api_key: 959138754151886
+
 collections:
-  - name: "blog"
-    label: "Blog"
-    folder: "_data/blog"
+  - name: "info"
+    label: "Info Posts"
+    folder: "_data/info"
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:

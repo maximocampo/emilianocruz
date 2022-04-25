@@ -40,7 +40,7 @@ const PostLink = ({ left, post , x, y}) => {
                     onMouseLeave={() => setHover(false)}
                     className="item-link"
                 />
-                <p className="item-link-title" style={{display: hover ? 'block' : 'none'}}>{post.title}</p>
+                <span className="item-link-title" style={{display: hover ? 'block' : 'none'}}>{post.title}</span>
                 </>
             )}
         </div>
