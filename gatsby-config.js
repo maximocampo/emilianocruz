@@ -10,13 +10,6 @@ module.exports = {
   plugins: [
     `gatsby-plugin-less`,
     {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `markdown-pages`,
-        path: `${__dirname}/_data`,
-      },
-    },
-    {
       resolve: `gatsby-transformer-remark`,
       options: {
         plugins: [{
@@ -56,7 +49,6 @@ module.exports = {
     },
     `gatsby-plugin-sass`,
     `gatsby-plugin-react-helmet`,
-    `gatsby-plugin-netlify-cms`,
     'gatsby-plugin-dark-mode',
     // siteURL is a must for sitemap generation
     `gatsby-plugin-sitemap`,
